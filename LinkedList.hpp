@@ -78,8 +78,7 @@ public:
 		while (pCurrent)
 		{
 			LinkProperty<_Type>* pNext = pCurrent->pNext;
-			pCurrent->pPrv = nullptr;
-			pCurrent->pNext = nullptr;
+			pCurrent->InternalSeparate();
 			pCurrent = pNext;
 		}
 		pHead = nullptr;
