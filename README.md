@@ -20,7 +20,7 @@ A simple, lightweight C++ implementation of a doubly-linked list designed for ef
    - With `Link`, `Unlink`, and `ClearLink` for adding, removing, or clearing elements, along with `GetHead`, `GetTail`, `GetNext`, and `GetPrv` for accessing and traversing elements, the API is designed for simplicity and convenience.
 
 ### 6. Minimal Dependencies
-   - Requires only `<functional>`, making this library lightweight and easy to integrate into larger projects without additional external libraries.
+   - No requires any library, making this library lightweight and easy to integrate into larger projects without additional external libraries.
 
 ## Example Usage
 
