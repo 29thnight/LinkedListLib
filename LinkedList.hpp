@@ -1,5 +1,6 @@
-#pragma once
-#include <functional>
+#ifndef _LINKEDLIST_HPP
+#define _LINKEDLIST_HPP
+
 //사용법은 리스트에 담고 싶은 객체에 LinkProperty를 상속받아서 사용하면 됩니다.
 template <typename _Type>
 class LinkedList;
@@ -110,7 +111,8 @@ public:
 		return pCurrent->pElement;
 	}
 
-	void ForEach(auto func)
+	template <typename _Func>
+	void ForEach(_Func func)
 	{
 		LinkProperty<_Type>* pCurrent = pHead;
 		while (pCurrent)
@@ -124,3 +126,5 @@ private:
 	LinkProperty<_Type>* pHead{};
 	LinkProperty<_Type>* pTail{};
 };
+
+#endif // !_LINKEDLIST_HPP
