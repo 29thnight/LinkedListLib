@@ -13,13 +13,10 @@ A simple, lightweight C++ implementation of a doubly-linked list designed for ef
 ### 3. Robust Unlinking Mechanism
    - The `Unlink` method allows nodes to be safely removed, automatically updating the neighboring nodes' pointers. This ensures the list's consistency and prevents dangling pointers, contributing to safer and more predictable code.
 
-### 4. Customizable Iteration
-   - Use the `ForEach` function to traverse and process each element in the list, with support for custom lambda functions. This enables flexible and concise iteration, aligning well with functional programming patterns.
-
-### 5. Easy-to-Use API
+### 4. Easy-to-Use API
    - With `Link`, `Unlink`, and `ClearLink` for adding, removing, or clearing elements, along with `GetHead`, `GetTail`, `GetNext`, and `GetPrv` for accessing and traversing elements, the API is designed for simplicity and convenience.
 
-### 6. Minimal Dependencies
+### 5. Minimal Dependencies
    - No requires any library, making this library lightweight and easy to integrate into larger projects without additional external libraries.
 
 ## Example Usage
