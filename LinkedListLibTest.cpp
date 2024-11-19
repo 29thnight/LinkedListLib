@@ -8,12 +8,14 @@ public:
 	{
 		std::cout << "Test()" << std::endl;
 	}
-	int Value;
 
 	bool operator== (const Test& Other) const
 	{
 		return Value == Other.Value;
 	}
+
+public:
+	int Value;
 };
 
 int main()
