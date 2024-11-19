@@ -27,7 +27,7 @@ A simple, lightweight C++ implementation of a doubly-linked list designed for ef
 To use this linked list, inherit `LinkProperty` in your custom class and add instances to the `LinkedList`:
 
 ```cpp
-#include "LinkedList.h"
+#include "LinkedList.hpp"
 
 class MyObject : public LinkProperty<MyObject> {
     // Custom object code
