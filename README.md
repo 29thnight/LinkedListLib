@@ -41,10 +41,10 @@ int main() {
 
     list.Link(&obj);
 
-   for(auto& element : list)
-   {
-      //iterator work
-   }
+    for(auto& element : list)
+    {
+       //iterator work
+    }
 
     return 0;
 }
