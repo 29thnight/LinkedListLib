@@ -41,9 +41,10 @@ int main() {
 
     list.Link(&obj);
 
-    list.ForEach([](MyObject* element) {
-        // Process each element here
-    });
+    for(auto& element : list)
+   {
+      //iterator work
+   }
 
     return 0;
 }
