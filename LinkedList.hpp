@@ -8,13 +8,13 @@ class LinkedList;
 template <typename _Type>
 struct LinkProperty
 {
-	LinkProperty* pPrv{ nullptr };
-	LinkProperty* pNext{ nullptr };
-	_Type* pElement{ nullptr };
+	LinkProperty* _pPrev{ nullptr };
+	LinkProperty* _pNext{ nullptr };
+	_Type* _pElement{ nullptr };
 
 public:
 	LinkProperty() = delete;
-	LinkProperty(_Type* pType) : pElement(pType) {};
+	LinkProperty(_Type* pType) : _pElement(pType) {};
 	virtual ~LinkProperty() = default;
 
 private:
@@ -23,51 +23,90 @@ private:
 private:
 	void InternalSeparate()
 	{
-		pPrv = nullptr;
-		pNext = nullptr;
+		_pPrev = nullptr;
+		_pNext = nullptr;
 	}
 };
-//링크드 리스트 클래스입니다. 해당 클래스로 링크, 언링크 가능하고, ForEach로 순회작업을 할 수 있습니다.
+//링크드 리스트 클래스입니다. 해당 클래스로 링크, 언링크 가능하고, Iterator로 순회작업을 할 수 있습니다.
 template <typename _Type>
 class LinkedList
 {
 public:
+	class Iterator
+	{
+	public:
+		Iterator(LinkProperty<_Type>* pProperty) : _pProperty(pProperty) {}
+		Iterator& operator++()
+		{
+			_pProperty = _pProperty->_pNext;
+			return *this;
+		}
+
+		_Type& operator*()
+		{
+			return (*_pProperty->_pElement);
+		}
+
+		bool operator!=(const Iterator& other)
+		{
+			return _pProperty != other._pProperty;
+		}
+
+		LinkProperty<_Type>* operator->()
+		{
+			return _pProperty;
+		}
+
+	private:
+		LinkProperty<_Type>* _pProperty{};
+	};
+
+	const Iterator begin()
+	{
+		return Iterator(_pHead);
+	}
+
+	const Iterator end()
+	{
+		return Iterator(nullptr);
+	}
+
 	void Link(LinkProperty<_Type>* pNewLinkProperty)
 	{
-		if (!pHead)
+		if (!_pHead)
 		{
-			pHead = pNewLinkProperty;
-			pTail = pNewLinkProperty;
+			_pHead = pNewLinkProperty;
+			_pTail = pNewLinkProperty;
 		}
 		else
 		{
-			pNewLinkProperty->pPrv = pTail;
-			pTail->pNext = pNewLinkProperty;
-			pTail = pNewLinkProperty;
+			pNewLinkProperty->_pPrev = _pTail;
+			_pTail->_pNext = pNewLinkProperty;
+			_pTail = pNewLinkProperty;
 		}
 	}
 
 	void Unlink(LinkProperty<_Type>* pDeleteLinkProperty)
 	{
-		LinkProperty<_Type>*& LinkageFront = pDeleteLinkProperty->pPrv;
-		LinkProperty<_Type>*& LinkageBack = pDeleteLinkProperty->pNext;
+		LinkProperty<_Type>*& LinkageFront = pDeleteLinkProperty->_pPrev;
+		LinkProperty<_Type>*& LinkageBack = pDeleteLinkProperty->_pNext;
 
 		if (LinkageFront)
 		{
-			LinkageFront->pNext = LinkageBack;
+			LinkageFront->_pNext = LinkageBack;
 		}
 		else
 		{
-			pHead = LinkageBack;
+			_pHead = LinkageBack;
 		}
 
 		if (LinkageBack)
 		{
-			LinkageBack->pPrv = LinkageFront;
+			LinkageBack->_pPrev = LinkageFront;
 		}
 		else
 		{
-			pTail = LinkageFront;
+			_pTail = LinkageFront;
 		}
 
 		pDeleteLinkProperty->InternalSeparate();
@@ -75,56 +114,21 @@ public:
 
 	void ClearLink()
 	{
-		LinkProperty<_Type>* pCurrent = pHead;
-		while (pCurrent)
+		LinkProperty<_Type>* LinkageCurrent = _pHead;
+		LinkProperty<_Type>* LinkageNext = nullptr;
+		while (LinkageCurrent)
 		{
-			LinkProperty<_Type>* pNext = pCurrent->pNext;
-			pCurrent->InternalSeparate();
-			pCurrent = pNext;
+			LinkageNext = LinkageCurrent->_pNext;
+			LinkageCurrent->InternalSeparate();
+			LinkageCurrent = LinkageNext;
 		}
-		pHead = nullptr;
-		pTail = nullptr;
-	}
-
-	LinkProperty<_Type>* GetHead()
-	{
-		return pHead;
-	}
-
-	LinkProperty<_Type>* GetTail()
-	{
-		return pTail;
-	}
-
-	LinkProperty<_Type>* GetNext(LinkProperty<_Type>* pCurrent)
-	{
-		return pCurrent->pNext;
-	}
-
-	LinkProperty<_Type>* GetPrv(LinkProperty<_Type>* pCurrent)
-	{
-		return pCurrent->pPrv;
-	}
-
-	_Type* GetElement(LinkProperty<_Type>* pCurrent)
-	{
-		return pCurrent->pElement;
-	}
-
-	template <typename _Func>
-	void ForEach(_Func func)
-	{
-		LinkProperty<_Type>* pCurrent = pHead;
-		while (pCurrent)
-		{
-			func(pCurrent->pElement);
-			pCurrent = pCurrent->pNext;
-		}
+		_pHead = nullptr;
+		_pTail = nullptr;
 	}
 
 private:
-	LinkProperty<_Type>* pHead{};
-	LinkProperty<_Type>* pTail{};
+	LinkProperty<_Type>* _pHead{};
+	LinkProperty<_Type>* _pTail{};
 };
 
 #endif // !_LINKEDLIST_HPP

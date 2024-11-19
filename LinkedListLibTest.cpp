@@ -30,21 +30,19 @@ int main()
 	List.Link(pInt2);
 	List.Link(pInt3);
 
-	List.ForEach([](Test* pInt)
-		{
-			std::cout << pInt->Value << " ";
-		});
+	for (auto& ele : List)
+	{
+		std::cout << ele.Value << " ";
+	}
 
 	std::cout << std::endl;
 
 	List.Unlink(pInt2);
 
-	List.ForEach([](Test* pInt)
-		{
-			std::cout << pInt->Value << " ";
-		});
-
-	std::cout << std::endl;
+	for (auto& ele : List)
+	{
+		std::cout << ele.Value << " ";
+	}
 
 	List.ClearLink();
 
