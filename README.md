@@ -30,6 +30,8 @@ To use this linked list, inherit `LinkProperty` in your custom class and add ins
 #include "LinkedList.hpp"
 
 class MyObject : public LinkProperty<MyObject> {
+   public:
+   MyObject() : LinkProperty(this) //LinkProperty Initalized MyObject Pointer
     // Custom object code
 };
 
