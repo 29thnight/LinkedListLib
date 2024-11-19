@@ -4,9 +4,8 @@
 class Test : public LinkProperty<Test>
 {
 public:
-	Test(int _Value) : Value(_Value)
+	Test(int _Value) : Value(_Value), LinkProperty(this)
 	{
-		pElement = this;
 		std::cout << "Test()" << std::endl;
 	}
 	int Value;

@@ -13,7 +13,8 @@ struct LinkProperty
 	_Type* pElement{ nullptr };
 
 public:
-	LinkProperty() = default;
+	LinkProperty() = delete;
+	LinkProperty(_Type* pType) : pElement(pType) {};
 	virtual ~LinkProperty() = default;
 
 private:
